@@ -1,0 +1,6 @@
+ddbb_host = "127.0.0.1"
+ddbb_pw = "pwd"
+ddbb_user = "root"
+topics_file = "output/topics.csv"
+gastos_temp_file = "output/gastos_temp.csv"
+spread_sheet = "Gastos"

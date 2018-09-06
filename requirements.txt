@@ -1,0 +1,5 @@
+git+git://github.com/seatgeek/fuzzywuzzy.git@0.16.0#egg=fuzzywuzzy
+python-Levenshtein
+gspread==0.6.2
+oauth2client==4.1.2
+pymysql==0.8.0
