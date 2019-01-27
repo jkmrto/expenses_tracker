@@ -15,9 +15,11 @@ class sheetHandler():
         return self.sheet.worksheet(sheet_name).get_all_records()
     
     def load_last_sheet(self):
-        last_sheet = self.sheet.worksheets()[-1]
+        last_sheet = self.get_sheet_list()[-1]
         return last_sheet.get_all_records()
     
+    def get_sheet_list(self):
+        return self.sheet.worksheets()
 
 
 #for sheet in spreed_sheet:

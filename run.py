@@ -31,6 +31,7 @@ def split_expenses_by_who(sheet):
     required_header = ["mes", "dia_mes", "dia_semana", "subtipo", "tipo",  "comentario"]
     expenses = []
     for both_expense in sheet:
+        print(both_expense)
         expenses_row = {k:v for k, v in both_expense.items() if k in required_header}
         expense_ana = both_expense.pop("gasto_ana")
         if expense_ana != "":
@@ -44,18 +45,19 @@ def split_expenses_by_who(sheet):
 
 
 if __name__ == "__main__":
+
+    mysql_handler.create_expenses_table()
     sheet_handler = sheetHandler()
-    sheet = sheet_handler.load_sheet("Julio")
+    for sheet_pointer in sheet_handler.get_sheet_list():
+        print(sheet_pointer)
+        sheet = sheet_pointer.get_all_records()
+        topics_available = topics.load_topics_from_csv(settings.topics_file)
 
-    topics_available = topics.load_topics_from_csv(settings.topics_file)
-
-    sheet = topics.check_and_fix_topic_names(sheet, topics.load_topics_from_csv(settings.topics_file))
-    expenses = split_expenses_by_who(sheet)
-    
-   # mysql_handler.create_expenses_table()
-    
-    for row in expenses:
-        mysql_handler.insert_expense(row)
+        checked_sheet = topics.check_and_fix_topic_names(sheet, topics.load_topics_from_csv(settings.topics_file))
+        expenses = split_expenses_by_who(checked_sheet)
+        
+        for row in expenses:
+            mysql_handler.insert_expense(row)
 
 
     
